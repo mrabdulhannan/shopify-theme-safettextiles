@@ -1,0 +1,66 @@
+<!-- product-grid-2.liquid -->
+<div class="product-card js-product-card product-card--style2 text-left" data-price="{{ product.price }}">
+  <div class="product-card__image-wr">
+    {%- assign image = product.featured_image -%}
+    <a class="product-card__image js" href="{{ product.url | within: collection }}" style="max-width: 680px;" data-image-id="{{ image.id }}">
+      {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+      <img class="lazyload"
+           data-src="{{ img_url }}"
+           src="{%- include 'srcBlank' -%}"
+           data-sizes="auto"
+           alt="{{ image.alt | escape }}">
+           {% include 'second-image'%}
+    </a>
+
+    
+
+    {%- if settings.enable_countdown_card -%}{%- include 'product-countdown' -%}{%- endif -%}
+    {%- if settings.enablevideo -%}
+      {%- include 'productVideo' -%}
+    {%- endif -%}
+    
+	
+    {%- if product.compare_at_price > product.price -%}
+    <div class="product-tag product-tag--absolute" aria-hidden="true">
+      {%- assign sale_minus = product.compare_at_price_min | minus: product.price_min -%}
+      {%- assign sale_percent =  sale_minus | times:100 | divided_by: product.compare_at_price_min -%}
+      -{{ sale_percent | append: '%'}}
+    </div>
+    {%- endif -%}
+  </div>
+  <div class="product-card__info">
+
+    <a href="{{ product.url | within: collection }}" title="{{product.title}}" class="product-card__name">{{ product.title }}</a>
+
+    {%- if product.available -%}
+    <div class="product-card__price">
+      {%- if product.compare_at_price > product.price -%}
+      {%- if product.price_varies -%}
+      {%- assign sale_price = product.price | money -%}
+      {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+      {%- else -%}
+      <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+      {{ product.price | money }}
+      <s class="product-card__regular-price">{{ product.compare_at_price | money }}</s>
+      <span class="visually-hidden">{{ 'products.product.sale_price' | t }}</span>
+      
+      {%- endif -%}
+      {%- else -%}
+      {%- if product.price_varies -%}
+      {%- assign price = product.price | money -%}
+      {{ 'products.product.from_text_html' | t: price: price }}
+      {%- else -%}
+      <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+      {{ product.price | money }}
+      {%- endif -%}
+
+      {%- endif -%}
+    </div>
+    {%- else -%}
+    <div class="product-card__availability">
+      {{ 'products.product.sold_out' | t }}
+    </div>
+    {%- endif -%}
+    {%- include 'swatch-grid-2' -%}
+  </div>
+</div>

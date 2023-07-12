@@ -1,0 +1,279 @@
+<!-- carousel-special-1.liquid -->
+<style>
+.customstyle{{ section.id }} {
+   background-size: cover;
+}
+.customstyle{{ section.id }}::before{
+  content: "";
+  position: absolute;
+  background-color:{{section.settings.bgsection}};
+  {% if section.settings.imagesection != blank %}
+    background-image: url({{ section.settings.imagesection | img_url: '1920x' }});
+  {% endif %}
+  background-size: cover;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
+.image-content-wrapper a {
+  display: inline-block;
+}
+.section-block .title {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 5px 0;
+}
+@media only screen and (max-width: 989px){
+  .customstyle{{ section.id }}::before{
+    display: none;
+  }
+}
+</style>
+<div class="customstyle{{ section.id }} position-relative">
+    {%- include 'style-section' -%}
+  <div class="{{ section.settings.setwidth }}">
+    <div class="section-block">
+      {%- include 'section-heading' -%}
+      {%- if section.blocks.size > 0 -%}
+      <div class="carousel-wrapper-1 dots-negative data-aos="{{section.settings.animation}}" > 
+        <div class="carousel-slider row pb-5 mb-0" id="Carousel-{{ section.id }}" 
+             data-rows="{{section.settings.rows}}"
+             data-slidesToShow="5"
+             data-slidestoscroll="1"
+             data-arrows="{{ section.settings.arrows }}"
+             data-dots="{{ section.settings.dots }}" 
+             data-draggable="{{ section.settings.draggable }}" 
+             data-infinite="false" 
+             data-section-id="{{ section.id }}" 
+             data-section-type="slickCarousels">
+          {%- for block in section.blocks -%}
+          <div class="carousel__slide-wrapper carousel__slide-wrapper--{{ block.id }}" {{ block.shopify_attributes }}>
+            <div class="carousel__slide">
+              <div class="carousel-wrap">
+                  <div class="col">
+                    {%- if block.settings.image != blank -%}
+                      <div class="image-content-wrapper text-center">
+                        {% assign img_url = block.settings.image | img_url: '242x300' | replace: '_1x1.', '_{width}x.' %}
+                        <a href="#">
+                          <img class="image-content lazyload transition"
+                              src="{% include 'srcBlank' %}"
+                              data-src="{{block.settings.image | img_url: '242x300' }}"
+                              alt="{{ block.settings.image.alt | escape }}">
+                        </a>
+                      </div>
+                    {%- else -%}
+                        <div class="image-content text-center">
+                          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                      </div>
+                    {%- endif -%}
+                    {%- if block.settings.title_small != blank -%}
+                      <div data-aos="fade" data-aos-duration="100" class="title text-center" >{{block.settings.title_small}}</div>
+                    {%- endif -%}
+                    <div class="carousel-content text-center" data-aos="{{section.settings.animation}}" data-aos-duration="100">
+                        {{block.settings.quote}}
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {%- endfor -%}
+        </div>
+      </div>
+      {%- endif -%}
+  
+      {%- if section.blocks.size == 0 -%}
+      {%- include 'no-blocks' -%}
+      {%- endif -%}
+    </div>
+  </div>
+  </div>
+  
+  {% schema %}
+  {
+    "name": "Carousel Special 1",
+    "class": "index-section",
+    "max_blocks": 5,
+    "settings": [
+    {
+      "type": "select",
+      "id": "animation",
+      "options": [
+        { "value": "", "label": "None"},
+        { "value": "fade", "label": "Fade"},
+        { "value": "fade-up", "label": "Fade Up"},
+        { "value": "fade-down", "label": "Fade Down"},
+        { "value": "fade-left", "label": "Fade Left"},
+        { "value": "fade-right", "label": "Fade Right"},
+        { "value": "fade-up-right", "label": "Fade Up Right"},
+        { "value": "fade-up-left", "label": "Fade Up Left"},
+        { "value": "fade-down-right", "label": "Fade Down Right"},
+        { "value": "fade-down-left", "label": "Fade Down Left"},
+        { "value": "flip-up", "label": "Flip Up"},
+        { "value": "flip-down", "label": "Flip Down"},
+        { "value": "flip-left", "label": "Flip Left"},
+        { "value": "flip-right", "label": "Flip Right"},
+        { "value": "slide-up", "label": "Slide Up"},
+        { "value": "slide-down", "label": "Slide Down"},
+        { "value": "slide-left", "label": "Slide Left"},
+        { "value": "slide-right", "label": "Slide Right"},
+        { "value": "zoom-in", "label": "Zoom In"},
+        { "value": "zoom-in-up", "label": "Zoom In Up"},
+        { "value": "zoom-in-down", "label": "Zoom In Down"},
+        { "value": "zoom-in-left", "label": "Zoom In Left"},
+        { "value": "zoom-in-right", "label": "Zoom In Right"},
+        { "value": "zoom-out", "label": "Zoom Out"},
+        { "value": "zoom-out-up", "label": "Zoom Out Up"},
+        { "value": "zoom-out-down", "label": "Zoom Out Down"},
+        { "value": "zoom-out-left", "label": "Zoom Out Feft"},
+        { "value": "zoom-out-right", "label": "Zoom Out Right"}
+      ],
+      "label": "Select Animation"
+  },
+    {
+      "type": "text",
+      "id": "paddingsection",
+      "label": "Padding Section",
+      "default": "0px 0px 0px 0px",
+      "info": "Padding: Top Right Bottom Left"
+    },
+    {
+      "type": "text",
+      "id": "marginsection",
+      "label": "Margin Section",
+      "default": "0px 0px 0px 0px",
+      "info": "Margin: Top Right Bottom Left"
+    },
+    {
+      "type": "text",
+      "id": "marginmobile",
+      "label": "Margin Mobile",
+      "default": "0px 0px 0px 0px",
+      "info": "Margin: Top Right Bottom Left"
+    },
+    {
+      "type": "text",
+      "id": "paddingmobile",
+      "label": "Padding Section Mobile",
+      "default": "60px 0px 60px 0px",
+      "info": "Padding: Top Right Bottom Left"
+    },
+    {
+      "type": "color",
+      "id": "bgsection",
+        "label": "Background Section",
+        "default": "#fefefe"
+    },
+    {
+      "type": "image_picker",
+      "id": "imagesection",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Morning Skincare"
+    },
+    {
+    "type": "color",
+    "id": "titlecolor",
+      "label": "Title Color",
+      "default": "#373737"
+    },
+    {
+      "type": "text",
+      "id": "title_top",
+      "label": "Sub Title Top",
+      "default": "Sub Title Top"
+    },
+    {
+      "type": "color",
+      "id": "subcolor",
+        "label": "Sub Title Color",
+        "default": "#373737"
+    },
+    {
+      "type": "checkbox",
+      "id": "arrows",
+      "label": "Arrows",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "draggable",
+      "label": "Draggable",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "dots",
+      "label": "Dots",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "setwidth",
+      "label": "Full Width",
+      "default": "container",
+      "options": [
+        {
+          "value": "container",
+          "label": "Box"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Container Fluid"
+        },
+        {
+          "value": "full",
+          "label": "Full"
+        }
+      ]
+    }
+    ],
+    "blocks": [
+      {
+        "type": "Text",
+        "name": "Text",
+        "settings": [
+         {
+            "type": "text",
+            "id": "title_small",
+            "label": "Title Small",
+            "default": "Comment"
+          },
+          {
+            "type": "textarea",
+            "id": "quote",
+            "label": "Text"
+           },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }
+          
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Carousel Special 1",
+        "category": "Image",
+        "blocks": [
+          {
+            "type": "Text"
+          },
+          {
+            "type": "Text"
+          },
+          {
+            "type": "Text"
+          }
+        ]
+      }
+    ]
+  }
+  {% endschema %}
+  

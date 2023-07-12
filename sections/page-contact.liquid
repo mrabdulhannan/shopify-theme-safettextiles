@@ -1,0 +1,153 @@
+<style>
+  .gmap-iframe .gmap_canvas,.gmap-iframe .mapouter,.gmap-iframe iframe{width:100%!important}@media (max-width:767px){.gmap-iframe .gmap_canvas,.gmap-iframe .mapouter,.gmap-iframe iframe{height:350px!important}}.contact-page__info li{padding:5px 0;border-bottom:1px solid var(--g-border-color);}.contact-page__info li:last-child{border:none}.contact-page__info .icon, .contact-page__info [class^=icon-]{width:17px;margin-right:10px}.rtl .contact-page__info .icon{margin-left:10px;margin-right:0}
+</style>
+<!-- page-contact.liquid -->
+<div class="container-fluid">
+  {%- if section.settings.title_page != blank -%}
+  <h1 class="h3 mb-3">{{ section.settings.title_page }}</h1>
+  {%- endif -%}
+  {%- if section.settings.contact_des != blank -%}
+  <div class="contact-page__des" >{{section.settings.contact_des}}</div>
+  {%- endif -%}
+  {%- if page.content != blank -%}
+  <div class="content-block">
+    <div class="rte">
+      {{ page.content }}
+    </div>
+  </div>
+  {%- endif -%}
+  <div class="contact-content">
+    <div class="row">
+      <div class="col-md-6 col-lg-12 col-sm-12 container">
+        {%- if section.blocks.size > 0 -%}
+          <div class="px-5 pt-0 pb-5 border">
+          {%- for block in section.blocks -%}
+            <ul class="list-unstyled contact-page__info">
+              {%- if block.settings.store_addess != blank -%}
+              <li>
+                {{block.settings.store_addess}}
+              </li>
+              {%- endif -%}
+              {%- if block.settings.contact_addess != blank -%}
+              <li class="text-primary2 text-uppercase mb-4">
+                {{block.settings.contact_addess}}
+              </li>
+              {%- endif -%}
+              {%- if block.settings.contact_phone != blank -%}
+              <li>
+                <a class="text-body" href="tel:+{{block.settings.contact_phone}}">{{block.settings.contact_phone}}</a>
+              </li>
+              {%- endif -%}
+              {%- if block.settings.contact_mail != blank -%}
+              <li >
+                <a class="text-decoration text-body" href="mailto:{{block.settings.contact_mail}}">{{block.settings.contact_mail}}</a>
+              </li>
+              {%- endif -%}
+            </ul>
+          {%- endfor -%}
+          </div>
+        {%- endif -%}
+        {%- if section.blocks.size == 0 -%}
+          {%- include 'no-blocks' -%}
+        {%- endif -%}
+      </div>
+      <div class="col-md-6 col-lg-12 col-sm-12">
+        <div class="contact-form form-vertical">
+          <h3 class="frm-title">Have Questions?</h3>
+          {%- form 'contact' -%}
+          {%- if form.posted_successfully? -%}
+          <p class="form-success">
+            {{ 'contact.form.post_success' | t }}
+          </p>
+          {%- endif -%}
+          {{ form.errors | default_errors }}
+          <div class="form-group">
+            <label for="ContactFormName" class="label--hidden">{{ 'contact.form.name' | t }}</label>
+            <input class="form-control" type="text" id="ContactFormName" name="contact[name]" placeholder="{{ 'contact.form.name' | t }}" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+          </div>
+          <div class="form-group">
+            <label for="ContactFormEmail" class="label--hidden">{{ 'contact.form.email' | t }}</label>
+            <input class="form-control" type="email" id="ContactFormEmail" name="contact[email]" placeholder="{{ 'contact.form.email' | t }}" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+          </div>
+          <div class="form-group">
+            <label for="ContactFormPhone" class="label--hidden">{{ 'contact.form.phone' | t }}</label>
+            <input class="form-control" type="tel" id="ContactFormPhone" name="contact[phone]" placeholder="{{ 'contact.form.phone' | t }}" pattern="[0-9\-]*" value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+          </div>
+          <div class="form-group">
+            <label for="ContactFormMessage" class="label--hidden">{{ 'contact.form.message' | t }}</label>
+            <textarea class="form-control-area" rows="10" id="ContactFormMessage" name="contact[body]" placeholder="{{ 'contact.form.message' | t }}">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+          </div>
+          <input type="submit" class="btn btn-theme d-inline-block w-auto mt-4" value="{{ 'contact.form.send' | t }}">
+          {%- endform -%}
+        </div>
+        {%- if section.settings.gmap and section.settings.gmap_iframe != blank -%}
+        <div class="gmap-iframe">
+          {{section.settings.gmap_iframe}}
+        </div>
+        {%- endif -%}
+      </div>      
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Contact us",
+    "settings": [
+    {
+      "type": "text",
+      "id": "title_page",
+      "label": "Title Page",
+      "default": "Stay in touch! Contact us"
+    },
+    {
+      "type": "textarea",
+      "id": "contact_des",
+      "label": "Description",
+      "default": "Have a question? Give us a call or fill out the contact form. We’d love to hear from you"
+    },
+    {
+      "type": "checkbox",
+      "id": "gmap",
+      "label": "Google map",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "gmap_iframe",
+      "label": "Iframe code",
+      "info": "💡 [Get iframe code here](https:\/\/www.embedgooglemap.net\/)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "address",
+      "name": "Address",
+      "settings": [
+        {
+          "type": "html",
+          "id": "store_addess",
+          "label": "Store"
+        },
+        {
+          "type": "text",
+          "id": "contact_addess",
+          "label": "Addess",
+          "default": "123 Sky Tower, West 21th Street, Suite 721, NY"
+        },
+        {
+          "type": "text",
+          "id": "contact_phone",
+          "label": "Phone",
+          "default": "+844 123 456 789"
+        },
+        {
+          "type": "text",
+          "id": "contact_mail",
+          "label": "Email",
+          "default": "sale@yourcompany.com"
+        }
+      ]
+    }
+  ]
+  }
+{% endschema %}

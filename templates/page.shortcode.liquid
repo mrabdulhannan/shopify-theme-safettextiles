@@ -1,0 +1,313 @@
+<style>
+  #myScrollspy>article{margin-bottom:40px;border-bottom:1px dashed;padding-bottom:40px}#left_column_shortcode .nav-link{padding:15px 0}.shortcodepage pre{background:#eff0f1;padding:10px}
+  .is_stuck .title_block{padding-top:20px;}
+</style>
+<div id="columns" class="container">
+  <h1 class="text-center">{{ page.title }}</h1>
+  <div class="row"  data-spy="scroll" data-target="#myScrollspy" data-offset="1">
+    <nav id="left_column_shortcode" class="sidebar col-sm-4 col-md-3">
+      <div class="sticky-sidebar js-stick-parent">
+        <span class="block">
+          <h2 class="title_block" style="margin-bottom: 20px">ELEMENT</h2>
+        </span>
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item"><a class=" nav-link" href="#listcollection">1. List Collections</a></li>
+          <li class="nav-item"><a class=" nav-link" href="#productlist">2. Product List</a></li>
+          <li class="nav-item"><a class="nav-link" href="#slider">3. Bootstrap carousel</a></li>
+          <li class="nav-item"><a class="nav-link" href="#slickslider">4. Slick slider</a></li>
+          <li class="nav-item"><a class="nav-link" href="#carouselproduct">5. Bootstrap Product Carousel</a></li>
+          <li class="nav-item"><a class="nav-link" href="#slickproductlist">6. Slick Product Carousel</a></li>
+          <li class="nav-item"><a class="nav-link" href="#defaulttabalign">7. Default Tab Align</a></li>
+          <li class="nav-item"><a class="nav-link" href="#tabbelow">8. Tab below</a></li>
+          <li class="nav-item"><a class="nav-link" href="#tabvertical">9. Tab Vertical</a></li>
+          <li class="nav-item"><a class="nav-link" href="#lightbox">10. Modal</a></li>
+          <li class="nav-item"><a class="nav-link" href="#alert">11. Alert</a></li>
+          <li class="nav-item"><a class="nav-link" href="#youtube">12. Youtube</a></li>
+        </ul>
+      </div>
+    </nav>
+    <section id="myScrollspy" class="shortcodepage col-sm-8 col-md-9">
+      <article id="listcollection">
+        <h4>1. List Collections</h4>
+        <pre>
+[listcollection action="new list" columns="3"]
+  [listcollection action="item" handle="frontpage" title="Collections" href="/collections/all"]
+  [listcollection action="item" handle="frontpage" title="Collections" href="/collections/all"]
+  [listcollection action="item" handle="frontpage" title="Collections" href="/collections/all"]
+[listcollection action="end list"]</pre>
+        {% include 'shortcode' load: '[listcollection action="new list" columns="3"]'%}
+        {% include 'shortcode' load: '[listcollection action="item" handle="frontpage" title="Collections" href="/collections/all"]'%}
+        {% include 'shortcode' load: '[listcollection action="item" handle="frontpage" title="Collections" href="/collections/all"]'%}
+        {% include 'shortcode' load: '[listcollection action="item" handle="frontpage" title="Collections" href="/collections/all"]'%}
+        {% include 'shortcode' load: '[listcollection action="end list"]'%}
+      </article>
+      <article id="productlist">
+        <h4>2. Product List</h4>
+        <pre>
+[productlist handle="frontpage" columnsProduct="3" limit="3" class="my-product-list" id="id-product-list"]</pre>
+        {% include 'shortcode' load: '[productlist handle="frontpage" columnsProduct="3" limit="3" class="my-product-list" id="id-product-list"]'%}
+      </article>
+      <article id="slider">
+        <h4>3. Bootstrap carousel</h4>
+        <pre>
+[carousel action="new slider" class="my-carousel-1"] 
+  [carousel action="display indicators" total="3" active="1"]
+  [carousel action="display control"] 
+  [carousel action="new list slide"] 
+  [carousel action="new slide" active="active" ]
+    &ltimg src="//cdn.shopify.com/s/files/1/0766/6813/t/2/assets/slideshow_image_1.jpg" alt="" &gt
+    &ltdiv class="carousel-caption" &lt Caption 1 &gt/div&gt                       
+  [carousel action="end slide"] 
+  [carousel action="new slide"] 
+    &ltimg src="//cdn.shopify.com/s/files/1/0766/6813/t/2/assets/slideshow_image_2.jpg" alt="" &gt
+    &ltdiv class="carousel-caption" &gt Caption 2 &gt/div&gt
+  [carousel action="end slide"] 
+  [carousel action="new slide"] 
+    &ltimg src="//cdn.shopify.com/s/files/1/0766/6813/t/2/assets/slideshow_image_3.jpg" alt="" &gt
+    &ltdiv class="carousel-caption" &gt Caption 3 &gt/div&gt
+  [carousel action="end slide"] 
+  [carousel action="end list slide"] 
+[carousel action="end slider"]</pre>
+        {% include 'shortcode' load: '[carousel action="new slider" class="my-carousel-1"]'%} 
+        {% include 'shortcode' load: '[carousel action="display indicators" total="3" active="1"]'%}
+        {% include 'shortcode' load: '[carousel action="display control"]'%} 
+        {% include 'shortcode' load: '[carousel action="new list slide"]'%} 
+        {% include 'shortcode' load: '[carousel action="new slide" active="active" ]'%}
+        <img src="//cdn.shopify.com/s/files/1/0766/6813/t/2/assets/slideshow_image_1.jpg" alt="" />
+        <div class="carousel-caption">Caption 1</div>                       
+        {% include 'shortcode' load: '[carousel action="end slide"]'%} 
+        {% include 'shortcode' load: '[carousel action="new slide"]'%} 
+        <img src="//cdn.shopify.com/s/files/1/0766/6813/t/2/assets/slideshow_image_2.jpg" alt="" />
+        <div class="carousel-caption">Caption 2</div>
+        {% include 'shortcode' load: '[carousel action="end slide"]'%}
+        {% include 'shortcode' load: '[carousel action="new slide"]'%} 
+        <img src="//cdn.shopify.com/s/files/1/0766/6813/t/2/assets/slideshow_image_3.jpg" alt="" />
+        <div class="carousel-caption">Caption 3</div>
+        {% include 'shortcode' load: '[carousel action="end slide"]'%} 
+        {% include 'shortcode' load: '[carousel action="end list slide"]'%} 
+        {% include 'shortcode' load: '[carousel action="end slider"]'%}
+      </article>
+      <article id="slickslider">
+        <h4>4. Slick slider</h4>
+        <pre>
+[slick action="new slick slider" columns="1" row="1"] 
+  [slick action="new item slick"] 
+    &ltimg src="//cdn.shopify.com/s/files/1/0766/6813/t/2/assets/slideshow_image_1.jpg" alt="" &gt
+    &ltdiv class="carousel-caption" &lt Caption 1 &gt/div&gt   
+  [slick action="end item slick"]
+  [slick action="new item slick"]
+    &ltimg src="//cdn.shopify.com/s/files/1/0766/6813/t/2/assets/slideshow_image_2.jpg" alt="" &gt
+    &ltdiv class="carousel-caption" &gt Caption 2 &gt/div&gt
+  [slick action="end item slick"]
+  [slick action="new item slick"]
+    &ltimg src="//cdn.shopify.com/s/files/1/0766/6813/t/2/assets/slideshow_image_3.jpg" alt="" &gt
+    &ltdiv class="carousel-caption" &gt Caption 3 &gt/div&gt
+  [slick action="end item slick"] 
+[slick action="end slick slider"]</pre>
+        {% include 'shortcode' load: '[slick action="new slick slider" columns="1" row="1"]'%} 
+        {% include 'shortcode' load: '[slick action="new item slick"]'%} 
+        <img src="//cdn.shopify.com/s/files/1/0766/6813/t/2/assets/slideshow_image_1.jpg" alt="" />
+        <div class="carousel-caption">Caption 1</div>   
+        {% include 'shortcode' load: '[slick action="end item slick"]'%}
+        {% include 'shortcode' load: '[slick action="new item slick"]'%}
+        <img src="//cdn.shopify.com/s/files/1/0766/6813/t/2/assets/slideshow_image_2.jpg" alt="" />
+        <div class="carousel-caption">Caption 2</div>
+        {% include 'shortcode' load: '[slick action="end item slick"]'%}
+        {% include 'shortcode' load: '[slick action="new item slick"]'%}
+        <img src="//cdn.shopify.com/s/files/1/0766/6813/t/2/assets/slideshow_image_3.jpg" alt="" />
+        <div class="carousel-caption">Caption 3</div>
+        {% include 'shortcode' load: '[slick action="end item slick"]'%} 
+        {% include 'shortcode' load: '[slick action="end slick slider"]'%}
+      </article>
+      <article id="carouselproduct" >
+        <h4>5. Bootstrap Product Carousel</h4>
+        <pre>[productcarousel handle="frontpage" item_in_page="3" columns_product="3" product_in_tab="16" interval="10000"]</pre>
+        {% include 'shortcode' load: '[productcarousel handle="frontpage" item_in_page="3" columns_product="3" product_in_tab="16" interval="10000"]'%}
+      </article>
+      <article id="slickproductlist">
+        <h4>6. Slick Product Carousel</h4>
+        <pre>[productslick handle="frontpage" row="1" columns_product="3" product_in_list="8" interval="10000"]</pre>
+        {% include 'shortcode' load: '[productslick handle="frontpage" row="1" columns_product="3" product_in_list="8" interval="10000"]'%}
+      </article>
+      <article id="defaulttabalign">
+        <h4>7. Default Tab Align</h4>
+        <pre>
+[tab action="new tabs" ]
+[tab action="new cover-tab-list"]
+[tab action="new tab-list" title="Tab 1" active="active"]
+[tab action="new tab-list" title="Tab 2"]
+[tab action="new tab-list" title="Tab 3"] 
+[tab action="new tab-list" title="Tab 4"] 
+[tab action="end cover-tab-list"] 
+[tab action="new tab-content"] 
+[tab action="new tab-panel" active="active"] 
+Content tab 1 
+[tab action="end tab-panel"] 
+[tab action="new tab-panel"] 
+Content tab 2 
+[tab action="end tab-panel"] 
+[tab action="new tab-panel"] 
+Content tab 3 
+[tab action="end tab-panel"]
+[tab action="new tab-panel"] 
+Content tab 4 
+[tab action="end tab-panel"] 
+[tab action="end tab-content"]
+[tab action="end tabs"]
+                    </pre>
+        {% include 'shortcode' load: '<!--[tab action="new tabs" ]
+                    [tab action="new cover-tab-list"]
+        [tab action="new tab-list" title="Tab 1" active="active"]
+        [tab action="new tab-list" title="Tab 2"]
+        [tab action="new tab-list" title="Tab 3"] 
+        [tab action="new tab-list" title="Tab 4"] 
+        [tab action="end cover-tab-list"] 
+        [tab action="new tab-content"] 
+        [tab action="new tab-panel" active="active"] 
+        Content tab 1 [tab action="end tab-panel"] 
+        [tab action="new tab-panel"] 
+        Content tab 2 
+        [tab action="end tab-panel"] 
+        [tab action="new tab-panel"] 
+        Content tab 3 
+        [tab action="end tab-panel"]
+        [tab action="new tab-panel"] 
+        Content tab 4 
+        [tab action="end tab-panel"] 
+        [tab action="end tab-content"] 
+        [tab action="end tabs"]-->' %}
+      </article>
+      <article id="tabbelow">
+        <h4>8. Tab below</h4>
+        <pre>
+[tabbelow action="new tabs" ] 
+[tabbelow action="new tab-content"] 
+[tabbelow action="new tab-panel" active="active"] 
+Content tab 1 [tabbelow action="end tab-panel"] 
+[tabbelow action="new tab-panel"] 
+Content tab 2 
+[tabbelow action="end tab-panel"] 
+[tabbelow action="new tab-panel"] 
+Content tab 3 
+[tabbelow action="end tab-panel"] 
+[tabbelow action="new tab-panel"] 
+Content tab 4 
+[tabbelow action="end tab-panel"] 
+[tabbelow action="end tab-content"] 
+[tabbelow action="new cover-tab-list"] 
+[tabbelow action="new tab-list" title="Tab 1" active="active"] 
+[tabbelow action="new tab-list" title="Tab 2"] 
+[tabbelow action="new tab-list" title="Tab 3"] 
+[tabbelow action="new tab-list" title="Tab 4"] 
+[tabbelow action="end cover-tab-list"] 
+[tabbelow action="end tabs"] 
+                    </pre>
+        {% include 'shortcode' load: '<!--[tabbelow action="new tabs" ] 
+                    [tabbelow action="new tab-content"] 
+        [tabbelow action="new tab-panel" active="active"] 
+        Content tab 1 [tabbelow action="end tab-panel"] 
+        [tabbelow action="new tab-panel"] 
+        Content tab 2 
+        [tabbelow action="end tab-panel"] 
+        [tabbelow action="new tab-panel"] 
+        Content tab 3 
+        [tabbelow action="end tab-panel"] 
+        [tabbelow action="new tab-panel"] 
+        Content tab 4 
+        [tabbelow action="end tab-panel"] 
+        [tabbelow action="end tab-content"] 
+        [tabbelow action="new cover-tab-list"] 
+        [tabbelow action="new tab-list" title="Tab 1" active="active"] 
+        [tabbelow action="new tab-list" title="Tab 2"] 
+        [tabbelow action="new tab-list" title="Tab 3"] 
+        [tabbelow action="new tab-list" title="Tab 4"] 
+        [tabbelow action="end cover-tab-list"] 
+        [tabbelow action="end tabs"]-->' %}
+      </article>
+      <article id="tabvertical">
+        <h4>9. Tab Vertical</h4>
+        <pre>
+[tabvertical action="new tabs" ]
+[tabvertical action="new cover-tab-list"]
+[tabvertical action="new tab-list" title="Tab 1" active="active"]
+[tabvertical action="new tab-list" title="Tab 2"]
+[tabvertical action="new tab-list" title="Tab 3"]
+[tabvertical action="new tab-list" title="Tab 4"]
+[tabvertical action="end cover-tab-list"]
+[tabvertical action="new tab-content"]
+[tabvertical action="new tab-panel" active="active"]
+Content tab 1
+[tabvertical action="end tab-panel"]
+[tabvertical action="new tab-panel"]
+Content tab 2
+[tabvertical action="end tab-panel"]
+[tabvertical action="new tab-panel"]
+Content tab 3
+[tabvertical action="end tab-panel"]
+[tabvertical action="new tab-panel"]
+Content tab 4
+[tabvertical action="end tab-panel"]
+[tabvertical action="end tab-content"]
+[tabvertical action="end tabs"]                     
+                    </pre>
+        {% include 'shortcode' load: '<!--[tabvertical action="new tabs" ]
+                    [tabvertical action="new cover-tab-list"]
+        [tabvertical action="new tab-list" title="Tab 1" active="active"]
+        [tabvertical action="new tab-list" title="Tab 2"]
+        [tabvertical action="new tab-list" title="Tab 3"]
+        [tabvertical action="new tab-list" title="Tab 4"]
+        [tabvertical action="end cover-tab-list"]
+        [tabvertical action="new tab-content"]
+        [tabvertical action="new tab-panel" active="active"]
+        Content tab 1
+        [tabvertical action="end tab-panel"]
+        [tabvertical action="new tab-panel"]
+        Content tab 2
+        [tabvertical action="end tab-panel"]
+        [tabvertical action="new tab-panel"]
+        Content tab 3
+        [tabvertical action="end tab-panel"]
+        [tabvertical action="new tab-panel"]
+        Content tab 4
+        [tabvertical action="end tab-panel"]
+        [tabvertical action="end tab-content"]
+        [tabvertical action="end tabs"]-->' %}
+      </article>
+      <article id="lightbox">
+        <h4>10. Modal</h4>
+        <pre>
+[modal action="new modal" type="video" url="http://www.youtube.com/embed/loFtozxZG0s" height="500" title="Modal video"] 
+[modal action="end modal"] </pre>
+        <pre>
+[modal action="new modal" type="image" url="//cdn.shopify.com/s/files/1/0766/6813/t/2/assets/slideshow_image_2.jpg" height="500" title="Modal image"] 
+[modal action="end modal"] </pre>
+        <pre>
+[modal action="new modal" type="html" title="Modal html"]This is content html, you can append other text, shortcodes:Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu enim eu eros eleifend suscipit. Duis consequat turpis sem, sit amet rhoncus urna imperdiet et. Vestibulum at metus nibh. Nam porta non metus eu viverra. Phasellus a consectetur nisl. Nunc ligula enim, aliquet in ligula id, consectetur aliquet libero. Aenean eleifend blandit hendrerit. Nunc scelerisque, quam eget tempor feugiat, nibh neque efficitur nunc, consectetur placerat magna quam non elit. Donec tortor leo, sagittis et leo a, vestibulum dictum lectus. Nam sed aliquet orci. Ut a ultricies elit, vehicula semper magna.[button isOpen="open" type="primary" text="Start here" url="http://www.shopify.com/" class="btn"][modal action="end modal"]</pre>
+        <div class="row text-center">
+          <div class="col-md-4">
+            {% include 'shortcode' load: '<!--[modal action="new modal" type="video" url="http://www.youtube.com/embed/loFtozxZG0s" height="500" title="Modal video"][modal action="end modal"]-->' %} 
+          </div>
+          <div class="col-md-4">
+            {% include 'shortcode' load: '<!--[modal action="new modal" type="image" url="//cdn.shopify.com/s/files/1/0766/6813/t/2/assets/slideshow_image_2.jpg" height="500" title="Modal image"][modal action="end modal"]-->' %} 
+          </div>
+          <div class="col-md-4">
+            {% include 'shortcode' load: '<!--[modal action="new modal" type="html" title="Modal html"] This is content html, you can append other text, shortcodes: <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu enim eu eros eleifend suscipit. Duis consequat turpis sem, sit amet rhoncus urna imperdiet et. Vestibulum at metus nibh. Nam porta non metus eu viverra. Phasellus a consectetur nisl. Nunc ligula enim, aliquet in ligula id, consectetur aliquet libero. Aenean eleifend blandit hendrerit. Nunc scelerisque, quam eget tempor feugiat, nibh neque efficitur nunc, consectetur placerat magna quam non elit. Donec tortor leo, sagittis et leo a, vestibulum dictum lectus. Nam sed aliquet orci. Ut a ultricies elit, vehicula semper magna. </p> <div class="text-center"> [button isOpen="open" type="primary" text="Start here" url="http://www.shopify.com/" class="btn"] </div> [modal action="end modal"]' %} 
+          </div>
+        </div>
+      </article>
+      <article id="alert">
+        <h4>11. Alert</h4>
+        <pre>[alert type="success" message="This is alert type Success"]</pre>
+        <pre>[alert type="info" message="This is alert type Info"]</pre>
+        <pre>[alert type="warning" message="This is alert type Warning"]</pre>
+        <pre>[alert type="danger" message="This is alert type Danger"]</pre>
+        {% include 'shortcode' load: '<!--[alert type="success" message="This is alert type Success"][alert type="info" message="This is alert type Info"] [alert type="warning" message="This is alert type Warning"][alert type="danger" message="This is alert type Danger"]-->' %}
+      </article>
+      <article id="youtube">
+        <h4>12. Youtube shortcode</h4>
+        <pre>[youtube width="600" height="350" video="aE7-KZVXvJs"]</pre>
+        {% include 'shortcode' load: '[youtube width="600" height="350" video="aE7-KZVXvJs"]' %}
+      </article>
+    </section>
+  </div>
+</div>

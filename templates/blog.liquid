@@ -1,0 +1,9 @@
+{%- case settings.blogpage -%}
+  {%- when 'blog-1' -%} {%- section 'blog-template-1' -%}
+  {%- when 'blog-2' -%} {%- section 'blog-template-2' -%}
+  {%- when 'blog-3' -%} {%- section 'blog-template-3' -%}
+  {%- when 'blog-4' -%} {%- section 'blog-template-4' -%}
+  {%- when 'blog-5' -%} {%- section 'blog-template-5' -%}
+{%- else -%}
+  Missing liquid
+{%- endcase -%}

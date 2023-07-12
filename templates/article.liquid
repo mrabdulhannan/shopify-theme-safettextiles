@@ -1,0 +1,10 @@
+{%- case settings.articlepage -%}
+  {%- when 'article-1' -%} {%- section 'article-template-1' -%}
+  {%- when 'article-2' -%} {%- section 'article-template-2' -%}
+  {%- when 'article-3' -%} {%- section 'article-template-3' -%}
+  {%- when 'article-4' -%} {%- section 'article-template-4' -%}
+  {%- when 'article-5' -%} {%- section 'article-template-5' -%}
+{%- else -%}
+  {%- section 'article-template-1' -%}
+{%- endcase -%}
+      

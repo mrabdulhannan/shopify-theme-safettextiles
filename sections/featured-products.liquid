@@ -1,0 +1,189 @@
+<!-- featured-products.liquid -->
+<div class="customstyle{{ section.id }}" >
+  {%- include 'style-section' -%}
+  <div class="{{ section.settings.setwidth }}">
+    <div class="section-block">
+      {%- include 'section-heading' -%}
+      {%- assign collection = collections[section.settings.collection] -%}
+      {%- assign rows = section.settings.rows -%}
+      {%- if collection != blank -%}
+      {%- assign product_limit = rows | times: 4 -%}
+      <div class="row" data-aos={{section.settings.animation}}>
+        {%- for product in collection.products limit: product_limit -%}
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 col-12">
+          {%- include 'product-card', product: product, collection: collection -%}
+        </div>
+        {%- endfor -%}
+      </div>
+      {%- else -%}
+      <div class="row">
+        {%- assign product_limit = rows | times: 4 -%}
+        {%- for i in (1..product_limit) -%}
+        {%- case i -%}
+        {%- when 7 -%}
+        {%- assign index = 1 -%}
+        {%- when 8 -%}
+        {%- assign index = 2 -%}
+        {%- when 9 -%}
+        {%- assign index = 3 -%}
+        {%- else -%}
+        {%- assign index = i -%}
+        {%- endcase -%}
+        <div class="col-md-3 col-sm-6 col-xs-6 ">
+          {%- include 'product-grid-blank' -%}
+        </div>
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+      {%- if section.settings.viewmore != blank -%}
+        <div class="text-center py-3">
+          <a href="{{collection.url}}" class="btn btn-theme btn-nobackground">{{section.settings.viewmore}}</a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Product grid",
+  "class": "index-section",
+  "settings": [
+  {
+    "type": "select",
+    "id": "animation",
+    "options": [
+      { "value": "", "label": "None"},
+      { "value": "fade", "label": "Fade"},
+      { "value": "fade-up", "label": "Fade Up"},
+      { "value": "fade-down", "label": "Fade Down"},
+      { "value": "fade-left", "label": "Fade Left"},
+      { "value": "fade-right", "label": "Fade Right"},
+      { "value": "fade-up-right", "label": "Fade Up Right"},
+      { "value": "fade-up-left", "label": "Fade Up Left"},
+      { "value": "fade-down-right", "label": "Fade Down Right"},
+      { "value": "fade-down-left", "label": "Fade Down Left"},
+      { "value": "flip-up", "label": "Flip Up"},
+      { "value": "flip-down", "label": "Flip Down"},
+      { "value": "flip-left", "label": "Flip Left"},
+      { "value": "flip-right", "label": "Flip Right"},
+      { "value": "slide-up", "label": "Slide Up"},
+      { "value": "slide-down", "label": "Slide Down"},
+      { "value": "slide-left", "label": "Slide Left"},
+      { "value": "slide-right", "label": "Slide Right"},
+      { "value": "zoom-in", "label": "Zoom In"},
+      { "value": "zoom-in-up", "label": "Zoom In Up"},
+      { "value": "zoom-in-down", "label": "Zoom In Down"},
+      { "value": "zoom-in-left", "label": "Zoom In Left"},
+      { "value": "zoom-in-right", "label": "Zoom In Right"},
+      { "value": "zoom-out", "label": "Zoom Out"},
+      { "value": "zoom-out-up", "label": "Zoom Out Up"},
+      { "value": "zoom-out-down", "label": "Zoom Out Down"},
+      { "value": "zoom-out-left", "label": "Zoom Out Feft"},
+      { "value": "zoom-out-right", "label": "Zoom Out Right"}
+    ],
+    "label": "Select Animation"
+  },
+  {
+    "type": "text",
+    "id": "paddingsection",
+    "label": "Padding Section",
+    "default": "0px 0px 0px 0px",
+    "info": "Padding: Top Right Bottom Left"
+  },
+  {
+    "type": "text",
+    "id": "paddingmobile",
+    "label": "Padding Section Mobile",
+    "default": "0px 0px 0px 0px",
+    "info": "Padding: Top Right Bottom Left"
+  },
+  {
+    "type": "text",
+    "id": "marginsection",
+    "label": "Margin Section",
+    "default": "80px 0px 0px 0px",
+    "info": "Margin: Top Right Bottom Left"
+  },
+  {
+    "type": "text",
+    "id": "marginmobile",
+    "label": "Margin Mobile",
+    "default": "80px 0px 0px 0px",
+    "info": "Margin: Top Right Bottom Left"
+  },
+  {
+    "type": "color",
+    "id": "bgsection",
+      "label": "Background Section",
+      "default": "#ffffff"
+  },
+  {
+    "type": "select",
+    "id": "setwidth",
+    "label": "Full Width",
+    "default": "container",
+    "options": [
+      {
+        "value": "container",
+        "label": "Box"
+      },
+      {
+        "value": "container-fluid",
+        "label": "Container Fluid"
+      },
+      {
+        "value": "full",
+        "label": "Full"
+      }
+    ]
+  },
+  {
+    "type": "text",
+    "id": "title_top",
+    "label": "Sub Title Top",
+    "default": "Sub Title Top"
+  },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Product list"
+    },
+    {
+      "type": "textarea",
+      "id": "des",
+      "label": "HTML / Description"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "rows",
+      "label": "Rows",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "header",
+      "content": "View more button"
+    },
+    {
+      "type": "text",
+      "id": "viewmore",
+      "label": "Text",
+      "default": "View all Products"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product grid",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,38 @@
+<!-- section-heading.liquid - Apply for all section title -->
+{%- if settings.sectionheading == 'heading-0' -%}
+  {%- if section.settings.title != blank -%}
+  <h3 class="section-title-0 text-center mb-5 font-family-2">
+    <span>{{section.settings.title}}</span>
+  </h3>
+  {%- endif -%}
+  {%- if section.settings.des != blank -%}
+  <p class="text-center mb-5 mt-n5">{{section.settings.des}}</p>
+  {%- endif -%}
+{%- elsif settings.sectionheading == 'heading-1' -%}
+  {%- if section.settings.title_top != blank -%}
+    <div class="subtop text-center text-top" data-aos="{{section.settings.animation}}" style="color:{{section.settings.subcolor}};" data-aos-duration="500">{{section.settings.title_top}}</div>
+  {%- endif -%}
+  {%- if section.settings.title != blank -%}
+  <h3 class="section-title-1 text-center  {% if section.settings.des != blank %} mb-2 {% else %} mb-5 {% endif %}" data-aos="{{section.settings.animation}}" style="color:{{section.settings.titlecolor}};" data-aos-duration="800">
+    <span>{{section.settings.title}}</span>
+  </h3>
+  {%- endif -%}
+  {%- if section.settings.des != blank -%}
+  <p class="text-center font-family-2 mb-5 des-title" data-aos="{{section.settings.animation}}" data-aos-duration="1100">{{section.settings.des}}</p>
+  {%- endif -%}
+{%- elsif settings.sectionheading == 'heading-2' -%}
+  {%- if section.settings.title != blank -%}
+  <h3 class="section-title-2 mb-5 font-weight-bold">
+    <span>{{section.settings.title}}</span>
+  </h3>
+  {%- endif -%}
+  {%- if section.settings.des != blank -%}
+  <p class="mb-5 mt-n5">{{section.settings.des}}</p>
+  {%- endif -%}
+{%- elsif settings.sectionheading == 'heading-3' -%}
+{%- elsif settings.sectionheading == 'heading-4' -%}
+{%- elsif settings.sectionheading == 'heading-5' -%}
+{%- elsif settings.sectionheading == 'heading-6' -%}
+{%- elsif settings.sectionheading == 'heading-7' -%}
+{%- elsif settings.sectionheading == 'heading-8' -%}
+{%- endif -%}

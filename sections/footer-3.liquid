@@ -1,0 +1,273 @@
+<style>
+  :root{
+    --g-footer-mid-bg:{{section.settings.footermidbg}};
+    --g-footer-mid-text:{{section.settings.footermidtext}};
+    --g-footer-mid-link:{{section.settings.footermidlink}};
+    --g-footer-bot-text:{{section.settings.footerbottext}};
+    }
+</style>
+<style>
+  .footer-mid {
+	background: var(--g-footer-mid-bg);
+	color: var(--g-footer-mid-text)
+}
+
+.footer-mid a {
+	color: var(--g-footer-mid-link)
+}
+
+.footer-mid a:hover {
+	opacity: .85
+}
+
+.social-icons {
+	background: var(--g-footer-mid-bg);
+	z-index: 1
+}
+
+.footer-bot {
+	background: var(--g-footer-mid-bg);
+	padding-top: 20px;
+	padding-bottom: 40px
+}
+
+.footer-bot__powered{
+	color: var(--g-footer-bot-text)
+}
+.footer-bot__powered a {
+	color: var(--g-main)
+}
+
+.footer-mid__contact-form input {
+	width: 100%;
+	margin-bottom: 10px;
+	font-size: 14px;
+	background: var(--g-footer-mid-text);
+	border: 1px solid #ccc
+}
+
+.footer-mid__contact-form textarea {
+	width: 100%;
+	height: 86px;
+	font-size: 14px;
+	background: var(--g-footer-mid-text);
+	border: 1px solid #ccc
+}
+
+.footer-mid__contact-form .form-success {
+	margin-top: 10px
+}
+
+.footer-mid__contact-form .btn {
+	padding: 15px 0;
+	margin-top: 5px;
+	width: 100%;
+	text-transform: uppercase;
+	font-size: 12px
+}
+
+.footer-container {
+	margin: 0 auto
+}
+
+.rtl .footer-container {
+	text-align: right
+}
+
+.footer-mid__title {
+	font-size: 30px;
+	text-transform: none;
+	margin-bottom: 35px;
+	margin-top: 0;
+	border-bottom: 1px solid rgba(255, 255, 255, .2);
+	padding: 35px 0;
+	position: relative
+}
+
+.rtl .footer-mid__title {
+	padding-left: 0;
+	padding-right: 20px
+}
+
+.footer-mid__des {
+	font-size: 18px;
+	line-height: 1.8
+}
+
+.footer-mid__info li {
+	padding: 5px 0;
+	border-bottom: 1px solid rgba(255, 255, 255, .2);
+	line-height: 33px
+}
+
+.footer-mid__info li:last-child {
+	border: none
+}
+
+.footer-mid__info .icon {
+	width: 15px;
+	margin-right: 10px
+}
+
+.rtl .footer-mid__info .icon {
+	margin-left: 10px;
+	margin-right: 0
+}
+
+.footer-mid__social li {
+	width: 40px;
+	height: 40px;
+	line-height: 38px;
+	border-radius: 5px;
+  border:1px solid #e9e9e9;
+	margin: 7px;
+}
+
+
+.footer-mid__contact-form .btn .icon {
+	margin: 0 4px
+}</style>
+
+<!-- footer-3.liquid -->
+<div class="footer-container text-center">
+  <section class="footer-mid pt-5">
+    {%- if section.settings.logo != blank -%}
+    <img class="lazyload mb-4" data-src="{{section.settings.logo | img_url: '100x'}}" />
+    {%- endif -%}
+    {%- if section.settings.linklist_link != blank -%}
+    <div class="footer-mid__linklist mb-2">
+      <ul>
+        {%- for link in linklists[section.settings.linklist_link].links -%}
+        <li class="d-inline-block px-3 pb-3 font-weight-bold">
+          <a href="{{link.url}}" title="{% include 'processMenuTitle' with itemName:link.title %}">{% include 'processMenuTitle' with itemName:link.title %}</a>
+        </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+    {%- endif -%}
+    {%- if section.settings.social_enable -%}
+    <div class="footer-mid__social position-relative">
+      <ul class="list--inline social-icons d-inline-block px-2 position-relative ">
+        {%- if settings.social_facebook_link != blank -%}
+        <li>
+          <a href="{{ settings.social_facebook_link | escape }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Facebook' }}" style="color:#3b5999">
+            {%- include 'icon-facebook' -%}</a>
+        </li>
+        {%- endif -%}
+        {%- if settings.social_twitter_link != blank -%}
+        <li>
+          <a href="{{ settings.social_twitter_link | escape }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}" style="color:#55acee">
+            {%- include 'icon-twitter' -%}</a>
+        </li>
+        {%- endif -%}
+        {%- if settings.social_pinterest_link != blank -%}
+        <li>
+          <a href="{{ settings.social_pinterest_link | escape }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Pinterest' }}" style="color:#bd081c">
+            {%- include 'icon-pinterest' -%}</a>
+        </li>
+        {%- endif -%}
+        {%- if settings.social_tumblr_link != blank -%}
+        <li>
+          <a href="{{ settings.social_tumblr_link | escape }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Tumblr' }}" style="color:#34465d">
+            {%- include 'icon-tumblr' -%}</a>
+        </li>
+        {%- endif -%}
+        {%- if settings.social_snapchat_link != blank -%}
+        <li>
+          <a href="{{ settings.social_snapchat_link | escape }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Snapchat' }}" style="color:#FFFC00">
+            {%- include 'icon-snapchat' -%}
+          </a>
+        </li>
+        {%- endif -%}
+        {%- if settings.social_youtube_link != blank -%}
+        <li>
+          <a href="{{ settings.social_youtube_link | escape }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'YouTube' }}" style="color:#cd201f">
+            {%- include 'icon-youtube' -%}
+            </a>
+        </li>
+        {%- endif -%}
+        {%- if settings.social_instagram_link != blank -%}
+        <li>
+          <a href="{{ settings.social_instagram_link | escape }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Instagram' }}" style="color:#e4405f">
+            {%- include 'icon-instagram' -%}</a>
+        </li>
+        {%- endif -%}
+        {%- if settings.social_vimeo_link != blank -%}
+        <li>
+          <a href="{{ settings.social_vimeo_link | escape }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Vimeo' }}" style="color:#1ab7ea">
+            {%- include 'icon-vimeo' -%}
+          </a>
+        </li>
+        {%- endif -%}
+      </ul>
+    </div>
+    {%- endif -%}
+  </section>
+  <section class="footer-bot text-center">
+    <div class="footer-bot__powered">
+      <p>Copyright &copy; {{ "now" | date: "%Y" }} <b>{{ shop.name }}</b>.{%- if section.settings.powered_enable -%}<span>{{ powered_by_link }}</span>{%- endif -%}</p>
+      
+    </div>
+  </section>
+</div>
+{% schema %}
+{
+  "name": "Footer 3",
+  "settings": [
+      {
+        "type": "header",
+        "content": "Mid footer"
+      },
+      {
+        "type": "color",
+        "id": "footermidbg",
+        "label": "Background",
+        "default": "#1e1e1e"
+      },
+      {
+        "type": "color",
+        "id": "footermidtext",
+        "label": "Text color",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "footermidlink",
+        "label": "Link color",
+        "default": "#999"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "link_list",
+        "id": "linklist_link",
+        "label": "Menu links"
+      },
+      {
+        "type": "checkbox",
+        "id": "social_enable",
+        "label": "Enable social",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Copyright"
+      },
+      {
+        "type": "color",
+        "id": "footerbottext",
+        "label": "Text",
+        "default": "#656565"
+      },
+      {
+        "type": "checkbox",
+        "id": "powered_enable",
+        "label": "Enable Shopify powered",
+        "default": true
+      }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,269 @@
+<!-- service.liquid -->
+{%- if section.settings.enablesection -%}
+<div class="customstyle{{ section.id }} " data-aos={{section.settings.animation}} >
+    {%- include 'style-section' -%}
+  <div class="{{ section.settings.setwidth }}">
+    <div class="section-block">
+      {%- include 'section-heading' -%}
+      <div class="services-wrapper dots-negative">
+        <div class="services-slider row mb-0" id="service-list-{{ section.id }}"
+             data-rows="{{section.settings.rows}}"
+             data-slidesToShow="{{section.blocks.size}}"
+             data-slidestoscroll="{{section.blocks.size}}"
+             data-arrows="{{ section.settings.arrows }}"
+             data-dots="{{ section.settings.dots }}" 
+             data-draggable="{{ section.settings.draggable }}" 
+             data-infinite="{{ section.settings.infinite }}" 
+             data-section-id="{{ section.id }}" 
+             data-section-type="slickCarousels">
+          {%- for block in section.blocks -%}
+          <div class="col services-item carousel__slide-wrapper--{{block.id}}" {{ block.shopify_attributes }}>
+            {%- case section.settings.layout -%}
+            {%- when 'style-1' -%}
+            <div class="media service-1 text-left">
+              <span class=" mr-4 iconx8" style="color:{{section.settings.iconcolor}};">
+                {{block.settings.icon | default:'[[ Icon ]]'}}
+              </span>
+              <div class="media-body">
+                <h6 class="mt-0 mb-2 h4" style="color:{{section.settings.titlecolor}};">{{block.settings.title}}</h6>
+                <div style="color:{{section.settings.subcolor}};">{{block.settings.description}}</div>
+              </div>
+            </div>
+            {%- when 'style-2' -%}
+            <div class="media service-2 text-center">
+              <div class="media-body">
+                  <div class="mb-4 iconx8" style="color:{{section.settings.iconcolor}};">
+                  {{block.settings.icon | default:'[[ Icon ]]'}}
+                </div>
+                  <h6 class="mt-0 mb-4 h4 text-uppercase" style="color:{{section.settings.titlecolor}};">{{block.settings.title}}</h6>
+                <div style="color:{{section.settings.subcolor}};">{{block.settings.description}}</div>
+              </div>
+            </div>
+            {%- when 'style-3' -%}
+            <div class="media service-3 text-center">
+              <div class="media-body">
+                <h6 class="mt-0 mb-2 text-theme h4">
+                  <span class="mr-1 iconx8" style="color:{{section.settings.iconcolor}};">
+                    {{block.settings.icon | default:'[[ Icon ]]'}}
+                  </span>
+                  <div style="color:{{section.settings.titlecolor}};">{{block.settings.title}}</div>
+                </h6>
+                <div style="color:{{section.settings.subcolor}};">{{block.settings.description}}</div>
+              </div>
+            </div>
+            {%- endcase -%}
+          </div>
+          {%- endfor -%}
+        </div>
+      </div>
+      {%- if section.blocks.size == 0 -%}
+      {%- include 'no-blocks' -%}
+      {%- endif -%}
+    </div>
+  </div>
+  </div>
+{%- endif -%}
+  {% schema %}
+  {
+    "name": "Services Page 2-1",
+    "class": "index-section",
+    "max_blocks": 6,
+    "settings": [
+        {
+        "type": "checkbox",
+        "id": "enablesection",
+        "label": "Enable This Section",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "animation",
+        "options": [
+          { "value": "", "label": "None"},
+          { "value": "fade", "label": "Fade"},
+          { "value": "fade-up", "label": "Fade Up"},
+          { "value": "fade-down", "label": "Fade Down"},
+          { "value": "fade-left", "label": "Fade Left"},
+          { "value": "fade-right", "label": "Fade Right"},
+          { "value": "fade-up-right", "label": "Fade Up Right"},
+          { "value": "fade-up-left", "label": "Fade Up Left"},
+          { "value": "fade-down-right", "label": "Fade Down Right"},
+          { "value": "fade-down-left", "label": "Fade Down Left"},
+          { "value": "flip-up", "label": "Flip Up"},
+          { "value": "flip-down", "label": "Flip Down"},
+          { "value": "flip-left", "label": "Flip Left"},
+          { "value": "flip-right", "label": "Flip Right"},
+          { "value": "slide-up", "label": "Slide Up"},
+          { "value": "slide-down", "label": "Slide Down"},
+          { "value": "slide-left", "label": "Slide Left"},
+          { "value": "slide-right", "label": "Slide Right"},
+          { "value": "zoom-in", "label": "Zoom In"},
+          { "value": "zoom-in-up", "label": "Zoom In Up"},
+          { "value": "zoom-in-down", "label": "Zoom In Down"},
+          { "value": "zoom-in-left", "label": "Zoom In Left"},
+          { "value": "zoom-in-right", "label": "Zoom In Right"},
+          { "value": "zoom-out", "label": "Zoom Out"},
+          { "value": "zoom-out-up", "label": "Zoom Out Up"},
+          { "value": "zoom-out-down", "label": "Zoom Out Down"},
+          { "value": "zoom-out-left", "label": "Zoom Out Feft"},
+          { "value": "zoom-out-right", "label": "Zoom Out Right"}
+        ],
+        "label": "Select Animation"
+      },
+      {
+        "type": "text",
+        "id": "paddingsection",
+        "label": "Padding Section",
+        "default": "0px 0px 0px 0px",
+        "info": "Padding: Top Right Bottom Left"
+      },
+      {
+        "type": "text",
+        "id": "paddingmobile",
+        "label": "Padding Section Mobile",
+        "default": "60px 0px 60px 0px",
+        "info": "Padding: Top Right Bottom Left"
+      },
+      {
+        "type": "text",
+        "id": "marginsection",
+        "label": "Margin Section",
+        "default": "0px 0px 0px 0px",
+        "info": "Margin: Top Right Bottom Left"
+      },
+      {
+        "type": "text",
+        "id": "marginmobile",
+        "label": "Margin Mobile",
+        "default": "0px 0px 0px 0px",
+        "info": "Margin: Top Right Bottom Left"
+      },
+      {
+        "type": "color",
+        "id": "bgsection",
+          "label": "Background Section",
+          "default": "#fefefe"
+      },
+      {
+        "type": "color",
+        "id": "iconcolor",
+          "label": "Icon Color",
+          "default": "#222222"
+      },
+      {
+        "type": "color",
+        "id": "titlecolor",
+          "label": "Title Color",
+          "default": "#222222"
+      },
+      {
+        "type": "color",
+        "id": "subcolor",
+          "label": "Sub Title Color",
+          "default": "#999999"
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "label": "Style",
+        "default": "style-1",
+        "options": [
+          {
+            "value": "style-1",
+            "label": "Style 1"
+          },
+          {
+            "value": "style-2",
+            "label": "Style 2"
+          },
+          {
+            "value": "style-3",
+            "label": "Style 3"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Service"
+      },
+      {
+        "type": "textarea",
+        "id": "des",
+        "label": "HTML / Description"
+      },
+      {
+        "type": "select",
+        "id": "setwidth",
+        "label": "Full Width",
+        "default": "container",
+        "options": [
+          {
+            "value": "container",
+            "label": "Box"
+          },
+          {
+            "value": "container-fluid",
+            "label": "Container Fluid"
+          },
+          {
+            "value": "full",
+            "label": "Full"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "arrows",
+        "label": "Arrows",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "draggable",
+        "label": "Draggable",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dots",
+        "label": "Dots",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "infinite",
+        "label": "Infinite",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "service",
+        "name": "Service",
+        "settings": [
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Title",
+            "default": "Service heading"
+          },
+          {
+            "type": "textarea",
+            "id": "description",
+            "label": "HTML / Description",
+            "default": "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.",
+            "info":"💡 [HTML Buider.](https:\/\/ap2020.myshopify.com\/pages\/html-builder)"
+          },
+          {
+            "type": "text",
+            "id": "icon",
+            "label": "Icon",
+            "info":"💡 [SVG Icon.](https:\/\/ap2020.myshopify.com\/pages\/html-builder#html-icon)"
+          }
+        ]
+      }
+    ]
+  }
+  {% endschema %}

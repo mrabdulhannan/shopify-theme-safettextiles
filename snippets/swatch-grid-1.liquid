@@ -1,0 +1,20 @@
+<ul class="product-card__swatch list-unstyled">
+  {%- assign counter = 0 -%}
+  {%- assign arrayVariants = '' -%}
+  {%- for variant in product.variants -%}
+    {%- if counter < 4 -%}
+    {%- unless arrayVariants contains variant.image -%}
+    {%- assign arrayVariants = arrayVariants | append: variant.image -%}
+        {%- if variant.image != blank -%}
+          <li data-tooltip="true" data-tooltipalltimes="true" class="js-swatch-card-item" title="{{variant.title}}" data-url="{{variant.url | within: collection}}" data-id="{{variant.id}}" data-image="{{ variant.image | img_url: 'large' }}" data-price="{{variant.price}}">
+            <img data-sizes="auto" src="{%- include 'srcBlank' -%}" class="lazyload" data-src="{{variant.image | img_url: 'small'}}" alt="{{variant.image.alt}}" />
+          </li>
+          {%- assign counter = counter | plus:1 -%}
+        {%- endif -%}
+    {%- endunless -%}
+    {%- else -%}
+  	  <li><a class="small" href="{{ product.url | within: collection }}" title="{{'products.product.view_more' | t}}">All ({{product.variants.size}})</a></li>
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+</ul>

@@ -1,0 +1,13 @@
+<style>
+    .customstyle{{ section.id }}{
+      background:{{section.settings.bgsection}};
+      padding: {{section.settings.paddingsection}};
+      margin: {{section.settings.marginsection}}
+    }
+    @media (max-width:767px){
+      .customstyle{{ section.id }}{
+        padding: {{section.settings.paddingmobile}};
+        margin: {{section.settings.marginmobile}}
+      }
+    }
+  </style>

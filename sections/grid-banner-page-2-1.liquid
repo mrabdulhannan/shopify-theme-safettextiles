@@ -1,0 +1,367 @@
+<!-- grid-banner.liquid -->
+{%- if section.settings.enablesection -%}
+<div class="customstyle{{ section.id }} " data-aos={{section.settings.animation}} >
+    {%- include 'style-section' -%}
+  <div class="{{ section.settings.setwidth }}">
+    <div class="section-block">
+      {%- include 'section-heading' -%}
+      <div class="row {% if section.settings.no_gutter %}no-gutters{% endif %}">
+        {%- for block in section.blocks -%}
+        <style>
+          /* Custom caption width, default value is 290px */
+          .figcaption--{{block.id}}{max-width:{{block.settings.max-width}}px !important;}.banner-theme-center .figcaption--{{block.id}}{margin-left: -{{block.settings.max-width | divided_by:2}}px !important}
+          .figcaption--{{block.id}} .bg-des{background-color: {{block.settings.bg_color}};opacity: {{block.settings.opacity_bg}};}
+          .figcaption--{{block.id}} .bg-des:before{background-color: {{block.settings.bg_colorhover}};}
+          .banner-theme-{{block.id}}:hover figcaption div>*{
+            color:{{block.settings.colorhover}} !important;
+          }
+          @media only screen and (max-width: 989px){
+            .banner-theme-center .figcaption--{{block.id}}{margin-left:0px !important;}
+          }
+        </style>
+        <div class="col-md-{{block.settings.width}}" {{ block.shopify_attributes }}>
+          <figure class="banner-theme hv-image-saturate banner-theme-{{block.settings.vertical}} banner-theme-{{block.settings.horizontal}} text-{{block.settings.text_align}} {% if section.settings.no_gutter %}m-0{% endif %} banner-theme-{{block.id}}">
+            {%- if block.settings.image != blank -%}
+            <img src="{% include 'srcBlank' %}" class="lazyload transition" data-src="{{block.settings.image | img_url:'1920x'}}">
+            {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+            <figcaption class="figcaption--{{block.id}}">
+              {%- if block.settings.description -%}
+                <div class="position-relative">
+                  <div class="bg-des"></div>
+                  <div class="position-relative" style="z-index: 3;">
+                    {{block.settings.description}}
+                  </div>
+                </div>
+              {%- endif -%}
+              {%- if block.settings.button_text != blank -%}
+              <button class="btn btn-underline btn-underline-white gradient-theme mt-3">
+                {{block.settings.button_text}}
+                {%- if block.settings.button_icon != blank -%}
+                <span class="d-inline-block ml-2">{{block.settings.button_icon}}</span>
+                {%- endif -%}
+              </button>
+              {%- endif -%}
+            </figcaption>		
+            {%- if block.settings.button_link != blank -%}
+            <a href="{{block.settings.button_link}}"></a>
+            {%- endif -%}
+          </figure>
+        </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+  </div>
+  {%- endif -%}
+  
+  {% schema %}
+  {
+    "name": "Grid banner Page 2-1",
+    "class": "index-section",
+    "settings": [
+    {
+        "type": "checkbox",
+        "id": "enablesection",
+        "label": "Enable This Section",
+        "default": true
+      },
+    {
+        "type": "select",
+        "id": "animation",
+        "options": [
+          { "value": "", "label": "None"},
+          { "value": "fade", "label": "Fade"},
+          { "value": "fade-up", "label": "Fade Up"},
+          { "value": "fade-down", "label": "Fade Down"},
+          { "value": "fade-left", "label": "Fade Left"},
+          { "value": "fade-right", "label": "Fade Right"},
+          { "value": "fade-up-right", "label": "Fade Up Right"},
+          { "value": "fade-up-left", "label": "Fade Up Left"},
+          { "value": "fade-down-right", "label": "Fade Down Right"},
+          { "value": "fade-down-left", "label": "Fade Down Left"},
+          { "value": "flip-up", "label": "Flip Up"},
+          { "value": "flip-down", "label": "Flip Down"},
+          { "value": "flip-left", "label": "Flip Left"},
+          { "value": "flip-right", "label": "Flip Right"},
+          { "value": "slide-up", "label": "Slide Up"},
+          { "value": "slide-down", "label": "Slide Down"},
+          { "value": "slide-left", "label": "Slide Left"},
+          { "value": "slide-right", "label": "Slide Right"},
+          { "value": "zoom-in", "label": "Zoom In"},
+          { "value": "zoom-in-up", "label": "Zoom In Up"},
+          { "value": "zoom-in-down", "label": "Zoom In Down"},
+          { "value": "zoom-in-left", "label": "Zoom In Left"},
+          { "value": "zoom-in-right", "label": "Zoom In Right"},
+          { "value": "zoom-out", "label": "Zoom Out"},
+          { "value": "zoom-out-up", "label": "Zoom Out Up"},
+          { "value": "zoom-out-down", "label": "Zoom Out Down"},
+          { "value": "zoom-out-left", "label": "Zoom Out Feft"},
+          { "value": "zoom-out-right", "label": "Zoom Out Right"}
+        ],
+        "label": "Select Animation"
+      },
+      {
+        "type": "text",
+        "id": "paddingsection",
+        "label": "Padding Section",
+        "default": "0px 0px 0px 0px",
+        "info": "Padding: Top Right Bottom Left"
+      },
+      {
+        "type": "text",
+        "id": "paddingmobile",
+        "label": "Padding Section Mobile",
+        "default": "60px 0px 60px 0px",
+        "info": "Padding: Top Right Bottom Left"
+      },
+      {
+        "type": "text",
+        "id": "marginsection",
+        "label": "Margin Section",
+        "default": "0px 0px 0px 0px",
+        "info": "Margin: Top Right Bottom Left"
+      },
+      {
+        "type": "text",
+        "id": "marginmobile",
+        "label": "Margin Mobile",
+        "default": "0px 0px 0px 0px",
+        "info": "Margin: Top Right Bottom Left"
+      },
+      {
+        "type": "color",
+        "id": "bgsection",
+          "label": "Background Section",
+          "default": "#fefefe"
+      },
+      {
+        "type": "color",
+        "id": "titlecolor",
+          "label": "Title Color",
+          "default": "#373737"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Grid banner"
+      },
+      {
+        "type": "textarea",
+        "id": "des",
+        "label": "HTML / Description"
+      },
+      {
+        "type": "select",
+        "id": "setwidth",
+        "label": "Full Width",
+        "default": "container",
+        "options": [
+          {
+            "value": "container",
+            "label": "Box"
+          },
+          {
+            "value": "container-fluid",
+            "label": "Container Fluid"
+          },
+          {
+            "value": "full",
+            "label": "Full"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "no_gutter",
+        "label": "No gutters",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "banner",
+        "name": "Banner",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+        {
+          "type": "select",
+          "id": "width",
+          "label": "Width",
+          "default": "6",
+          "options": [
+            {
+              "value": "2",
+              "label": "16.67%"
+            },
+            {
+              "value": "3",
+              "label": "25%"
+            },
+            {
+              "value": "4",
+              "label": "33.33%"
+            },
+            {
+              "value": "5",
+              "label": "41.67%"
+            },
+            {
+              "value": "6",
+              "label": "50%"
+            },
+            {
+              "value": "7",
+              "label": "58.33%"
+            },
+            {
+              "value": "8",
+              "label": "66.67%"
+            },
+            {
+              "value": "9",
+              "label": "75%"
+            },
+            {
+              "value": "10",
+              "label": "83.33%"
+            },
+            {
+              "value": "12",
+              "label": "100%"
+            }
+          ]
+        },
+          {
+            "type": "textarea",
+            "id": "description",
+            "label": "HTML / Description",
+            "default": "<h3 class='mb-2'>Banner title</h3><p>Lorem ipsum dolor sit amet</p>",
+            "info":"💡 [HTML Buider.](https:\/\/ap2020.myshopify.com\/pages\/html-builder)"
+          },
+          {
+            "type": "color",
+            "id": "bg_color",
+              "label": "Background Description",
+              "default": "#fefefe"
+          },
+          {
+            "type": "color",
+            "id": "bg_colorhover",
+              "label": "Background Description Hover",
+              "default": "#f4a678"
+          },
+          {
+            "type": "color",
+            "id": "colorhover",
+              "label": "Color Description Hover",
+              "default": "#ffffff"
+          },
+          {
+            "type": "range",
+            "id": "opacity_bg",
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "unit": "opa",
+            "label": "Desciption max width",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "max-width",
+            "min": 280,
+            "max": 800,
+            "step": 10,
+            "unit": "px",
+            "label": "Desciption max width",
+            "default": 290
+          },
+          {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button text",
+            "default": "View more"
+          },
+          {
+            "type": "text",
+            "id": "button_icon",
+            "label": "Button icon",
+            "info":"💡 [SVG Icon.](https:\/\/ap2020.myshopify.com\/pages\/html-builder#html-icon)"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+          },
+        {
+          "type": "select",
+          "id": "vertical",
+          "label": "Vertical align",
+          "default": "bottom",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "mid",
+              "label": "Mid"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "horizontal",
+          "label": "Horizontal align",
+          "default": "center",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "Text align",
+          "default": "center",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        }
+        ]
+      }
+    ]
+  }
+  {% endschema %}

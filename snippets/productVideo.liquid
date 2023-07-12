@@ -1,0 +1,10 @@
+{%- if product.metafields.info.video != blank -%}
+<!-- productVideo.liquid -->
+<span class="js-play-button">
+  {%- include 'icon-play' -%}
+  {%- include 'icon-pause' -%}
+</span>
+<video class="js-product-video"  loop {% if settings.video_mute %}muted{% endif %}>
+  <source type="video/mp4" src="{{product.metafields.info.video}}">
+</video>
+{%- endif -%}

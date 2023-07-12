@@ -1,0 +1,161 @@
+<!-- service-v3.liquid -->
+{%- if section.settings.enablesection -%}
+<div class="customstyle{{ section.id }}" data-aos="{{section.settings.animation}}" >
+    {%- include 'style-section' -%}
+    <div class="{{ section.settings.setwidth }}">
+        <div class="row">
+        {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                    <ul class="list-unstyled contact-page__info">
+                    {%- if block.settings.store_addess != blank -%}
+                    <li>
+                        {{block.settings.store_addess}}
+                    </li>
+                    {%- endif -%}
+                    {%- if block.settings.contact_addess != blank -%}
+                    <li class="text-primary2 text-uppercase mb-4">
+                        {{block.settings.contact_addess}}
+                    </li>
+                    {%- endif -%}
+                    {%- if block.settings.contact_phone != blank -%}
+                    <li>
+                        <a class="text-body" href="tel:+{{block.settings.contact_phone}}">{{block.settings.contact_phone}}</a>
+                    </li>
+                    {%- endif -%}
+                    {%- if block.settings.contact_mail != blank -%}
+                    <li >
+                        <a class="text-decoration text-body" href="mailto:{{block.settings.contact_mail}}">{{block.settings.contact_mail}}</a>
+                    </li>
+                    {%- endif -%}
+                    </ul>
+                </div>
+            {%- endfor -%}
+            {%- endif -%}
+            {%- if section.blocks.size == 0 -%}
+            {%- include 'no-blocks' -%}
+        {%- endif -%}
+        </div>
+        
+    </div>
+  </div>
+  {%- endif -%}
+    {% schema %}
+    {
+      "name": "Service About 3",
+      "settings": [
+          {
+            "type": "checkbox",
+            "id": "enablesection",
+            "label": "Enable This Section",
+            "default": true
+          },
+          {
+          "type": "select",
+          "id": "animation",
+          "options": [
+              { "value": "", "label": "None"},
+              { "value": "fade", "label": "Fade"},
+              { "value": "fade-up", "label": "Fade Up"},
+              { "value": "fade-down", "label": "Fade Down"},
+              { "value": "fade-left", "label": "Fade Left"},
+              { "value": "fade-right", "label": "Fade Right"},
+              { "value": "fade-up-right", "label": "Fade Up Right"},
+              { "value": "fade-up-left", "label": "Fade Up Left"},
+              { "value": "fade-down-right", "label": "Fade Down Right"},
+              { "value": "fade-down-left", "label": "Fade Down Left"},
+              { "value": "flip-up", "label": "Flip Up"},
+              { "value": "flip-down", "label": "Flip Down"},
+              { "value": "flip-left", "label": "Flip Left"},
+              { "value": "flip-right", "label": "Flip Right"},
+              { "value": "slide-up", "label": "Slide Up"},
+              { "value": "slide-down", "label": "Slide Down"},
+              { "value": "slide-left", "label": "Slide Left"},
+              { "value": "slide-right", "label": "Slide Right"},
+              { "value": "zoom-in", "label": "Zoom In"},
+              { "value": "zoom-in-up", "label": "Zoom In Up"},
+              { "value": "zoom-in-down", "label": "Zoom In Down"},
+              { "value": "zoom-in-left", "label": "Zoom In Left"},
+              { "value": "zoom-in-right", "label": "Zoom In Right"},
+              { "value": "zoom-out", "label": "Zoom Out"},
+              { "value": "zoom-out-up", "label": "Zoom Out Up"},
+              { "value": "zoom-out-down", "label": "Zoom Out Down"},
+              { "value": "zoom-out-left", "label": "Zoom Out Feft"},
+              { "value": "zoom-out-right", "label": "Zoom Out Right"}
+          ],
+          "label": "Select Animation"
+          },
+          {
+          "type": "text",
+          "id": "paddingsection",
+          "label": "Padding Section",
+          "default": "0px 0px 0px 0px",
+          "info": "Padding: Top Right Bottom Left"
+          },
+          {
+          "type": "text",
+          "id": "marginsection",
+          "label": "Margin Section",
+          "default": "0px 0px 0px 0px",
+          "info": "Margin: Top Right Bottom Left"
+          },
+          {
+          "type": "color",
+          "id": "bgsection",
+              "label": "Background Section",
+              "default": "#fefefe"
+          },
+          {
+              "type": "select",
+              "id": "setwidth",
+              "label": "Full Width",
+              "default": "container",
+              "options": [
+                {
+                  "value": "container",
+                  "label": "Box"
+                },
+                {
+                  "value": "container-fluid",
+                  "label": "Container Fluid"
+                },
+                {
+                  "value": "full",
+                  "label": "Full"
+                }
+              ]
+            }
+      ],
+      "blocks": [
+        {
+        "type": "address",
+        "name": "Address",
+        "settings": [
+            {
+            "type": "html",
+            "id": "store_addess",
+            "label": "Store"
+            },
+            {
+            "type": "text",
+            "id": "contact_addess",
+            "label": "Addess",
+            "default": "123 Sky Tower, West 21th Street, Suite 721, NY"
+            },
+            {
+            "type": "text",
+            "id": "contact_phone",
+            "label": "Phone",
+            "default": "+844 123 456 789"
+            },
+            {
+            "type": "text",
+            "id": "contact_mail",
+            "label": "Email",
+            "default": "sale@yourcompany.com"
+            }
+        ]
+        }
+    ]
+    }
+    {% endschema %}

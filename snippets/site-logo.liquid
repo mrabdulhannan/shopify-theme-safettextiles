@@ -1,0 +1,35 @@
+<!-- site-logo.liquid -->
+<style>
+.site-header__logo img {width: {{ settings.logo_max_width | append: 'px' }};}
+.site-header__logo svg {width: {{ settings.logo_max_width | append: 'px' }}; height: auto;}
+</style>
+{%- if template.name == 'index' -%}
+<h1 class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
+  {%- else -%}
+  <div class="site-header__logo h1" itemscope itemtype="http://schema.org/Organization">
+    {%- endif -%}
+    {%- if settings.logosvg != blank -%}
+    <a href="/" itemprop="url" class="site-header__logo-link">
+      {{settings.logosvg}}
+    </a>
+    {%- elsif settings.logo != blank -%}
+    {%- capture image_size -%}{{ settings.logo_max_width }}x{%- endcapture -%}
+    <a href="/" itemprop="url" class="site-header__logo-link">
+      <img class="logo-dark" src="{{ settings.logo | img_url: image_size  }}"
+           srcset="{{ settings.logo | img_url: image_size  }} 1x, {{ settings.logo | img_url: image_size, scale: 2 }} 2x"
+           alt="{{ settings.logo.alt | default: shop.name }}"
+           itemprop="logo">
+      <img class="logo-white d-none" src="{{ settings.logo_white | img_url: image_size  }}"
+           srcset="{{ settings.logo_white | img_url: image_size  }} 1x, {{ settings.logo_white | img_url: image_size, scale: 2 }} 2x"
+           alt="{{ settings.logo_white.alt | default: shop.name }}"
+           itemprop="logo">
+    </a>
+    {%- else -%}
+    {%- assign shop_name_length = shop.name.size -%}
+    <a href="/" itemprop="url" {% if shop_name_length > 10 %} class="site-header__shop-name--small"{% endif %}>{{ shop.name }}</a>
+    {%- endif -%}
+    {%- if template.name != 'index' -%}
+  </div>
+  {%- else -%}
+</h1>
+{%- endif -%}
